@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/iggym/CLionProjects/Tarea1Algoritmos/calculate.hpp
+
+C:/Users/iggym/CLionProjects/Tarea1Algoritmos/main.cpp
+iostream
+-
+algorithm
+-
+cstring
+-
+calculate.hpp
+C:/Users/iggym/CLionProjects/Tarea1Algoritmos/calculate.hpp
+
