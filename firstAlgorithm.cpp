@@ -55,12 +55,12 @@ int* read_block(int step, int block_size) {
 }
 
 /**
- * Returns the X coordinate of the matrix where a block begins.
+ * Calculates the X coordinate of the matrix where a block begins.
  *
  * @param step
  *      The step where the block is calculated
  * @param block_size
- * @param
+ * @param string_length
  *      The length of the string on top of the matrix
  * @return
  *      The X coordinate where the block begins in the matrix
@@ -71,11 +71,12 @@ int calculate_X_coordinate(int step, int block_size, int string_length) {
 }
 
 /**
- * Returns the Y coordinate of the matrix where a block begins.
+ * Calculates the Y coordinate of the matrix where a block begins.
  *
  * @param step
  *      The step where the block is calculated
- * @param
+ * @param block_size
+ * @param string_length
  *      The length of the string on the side of the matrix
  * @return
  *      The Y coordinate where the block begins in the matrix
@@ -83,4 +84,15 @@ int calculate_X_coordinate(int step, int block_size, int string_length) {
 int calculate_Y_coordinate(int step, int block_size, int string_length) {
     int blocks_per_line = ceil((double) string_length/block_size);
     return step / blocks_per_line;
+}
+
+pair<string, string> get_strings(string filename) {
+    string X;
+    string Y;
+    ifstream infile;
+    infile.open(filename);
+    getline(infile, X);
+    getline(infile, Y);
+    infile.close();
+    return make_pair(X,Y);
 }
