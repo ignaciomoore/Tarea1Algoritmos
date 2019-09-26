@@ -5,6 +5,9 @@
 #include <algorithm>
 #include <cstring>
 #include "calculate.hpp"
+#include "firstAlgorithm.hpp"
+
+using namespace std;
 
 int main() {
 
@@ -29,6 +32,8 @@ int main() {
     std::cout << r[1] << " ";
     std::cout << r[2] << std::endl;
     std::cout << "Expected 2 1 2" << std::endl;
+
+    write_block(r,block_size,20);
 
     return 0;
 }

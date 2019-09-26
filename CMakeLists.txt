@@ -3,4 +3,4 @@ project(Tarea1Algoritmos)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Tarea1Algoritmos main.cpp calculate.cpp calculate.hpp firstAlgorithm.cpp)
+add_executable(Tarea1Algoritmos main.cpp calculate.cpp calculate.hpp firstAlgorithm.cpp firstAlgorithm.hpp)

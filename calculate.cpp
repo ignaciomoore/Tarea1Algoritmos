@@ -8,6 +8,26 @@
 #include <windef.h>
 #include <algorithm>
 
+/**
+ * Calculates the pending block on the bottom right corner
+ *
+ * @param block_size
+ * @param left_block
+ * @param top_block
+ * @param diagonal_block
+ * @param string_size
+ * @param X
+ *      String along the top of the matrix
+ * @param Y
+ *      String along the side of the matrix
+ * @param Y_char_index
+ *      Where the pending block starts on the Y axis
+ * @param X_char_index
+ *      Where the pending block starts on the X axis
+ * @return
+ *      The calculated block
+ */
+
 int* calculate_block(int block_size, int* left_block, int* top_block, int* diagonal_block, int string_size, char* X,
         char* Y, int Y_char_index, int X_char_index) {
 
