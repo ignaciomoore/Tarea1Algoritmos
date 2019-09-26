@@ -65,3 +65,4 @@ int* calculate_block(int block_size, int* left_block, int* top_block, int* diago
     }
     return result_block;
 }
+

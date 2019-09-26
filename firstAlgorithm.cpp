@@ -4,6 +4,7 @@
 
 #include <cstdio>
 #include <fstream>
+#include <string>
 
 using namespace std;
 /**
@@ -25,4 +26,29 @@ void write_block(int* block, int block_size, int step) {
 
     outfile << out_block;
     outfile.close();
+}
+
+/**
+ * Reads a block from a text file and returns the block as an int array
+ *
+ * @param step
+ *      The step in which the block was written
+ * @param block_size
+ * @return
+ *      The block as an int array
+ */
+int* read_block(int step, int block_size) {
+    ifstream infile;
+    string filename = "calculated_block_" + to_string(step) + ".txt";
+    infile.open(filename);
+    string cell;
+    int* block = new int[block_size];
+
+    infile >> cell;
+    for (int i = 0; i < block_size; i++) {
+        block[i] = stoi(cell.substr(i,1));
+    }
+
+    infile.close();
+    return block;
 }

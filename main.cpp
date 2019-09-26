@@ -33,7 +33,12 @@ int main() {
     std::cout << r[2] << std::endl;
     std::cout << "Expected 2 1 2" << std::endl;
 
-    write_block(r,block_size,20);
+    int* read;
+    read = read_block(20,block_size);
+
+    cout << read[0] << " ";
+    cout << read[1] << " ";
+    cout << read[2] << endl;
 
     return 0;
 }
