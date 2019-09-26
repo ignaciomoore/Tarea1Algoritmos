@@ -1,21 +1,12 @@
 //
-// Created by iggym on 26/09/2019.
+// Created by Ignacio Moore on 26/09/2019.
 //
 
 #include <cstdio>
+#include <fstream>
 
-class firstAlgorithm {
+using namespace std;
 
-public:
-    FILE* input;
-    FILE* output;
-    char* X;
-    char* Y;
-    //int[] top_block;
-    //int[] left_block;
-    //int[] diagonal_block;
-    int block_size;
+int* get_top_block(int block_size, int X_char_index, int Y_char_index, char* X, char* Y) {
 
-private:
-
-};
+}
