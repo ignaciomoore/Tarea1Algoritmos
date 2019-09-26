@@ -4,6 +4,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cstring>
+#include <cmath>
 #include "calculate.hpp"
 #include "firstAlgorithm.hpp"
 
@@ -39,6 +40,8 @@ int main() {
     cout << read[0] << " ";
     cout << read[1] << " ";
     cout << read[2] << endl;
+    cout << calculate_X_coordinate(17, 3, 7) << endl;
+    cout << calculate_Y_coordinate(17, 3, 7) << endl;
 
     return 0;
 }

@@ -5,6 +5,7 @@
 #include <cstdio>
 #include <fstream>
 #include <string>
+#include <cmath>
 
 using namespace std;
 /**
@@ -51,4 +52,35 @@ int* read_block(int step, int block_size) {
 
     infile.close();
     return block;
+}
+
+/**
+ * Returns the X coordinate of the matrix where a block begins.
+ *
+ * @param step
+ *      The step where the block is calculated
+ * @param block_size
+ * @param
+ *      The length of the string on top of the matrix
+ * @return
+ *      The X coordinate where the block begins in the matrix
+ */
+int calculate_X_coordinate(int step, int block_size, int string_length) {
+    int blocks_per_line = ceil((double) string_length/block_size);
+    return (step % blocks_per_line - 1) * block_size;
+}
+
+/**
+ * Returns the Y coordinate of the matrix where a block begins.
+ *
+ * @param step
+ *      The step where the block is calculated
+ * @param
+ *      The length of the string on the side of the matrix
+ * @return
+ *      The Y coordinate where the block begins in the matrix
+ */
+int calculate_Y_coordinate(int step, int block_size, int string_length) {
+    int blocks_per_line = ceil((double) string_length/block_size);
+    return step / blocks_per_line;
 }
