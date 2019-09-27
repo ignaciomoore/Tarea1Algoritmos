@@ -64,7 +64,7 @@ int main() {
                     if (k == 0)
                         current_block[k] = calculate_Y_coordinate(step, block_size, string_length);
                     else {
-                        x_index = calculate_X_coordinate(step, block_size, string_length);
+                        x_index = calculate_X_coordinate(step, block_size, string_length) + k;
                         y_index = calculate_Y_coordinate(step, block_size, string_length);
                         if (X[x_index] == Y[y_index])
                             current_block[k] = top_block[k - 1];
@@ -75,14 +75,18 @@ int main() {
                         }
                     }
                 }
+                write_block(current_block, block_size, step);
+                step++;
             }
             else if (j == (block_size - 1)) {
                 top_step = get_top_step(step,blocks_per_line);
-                top_block = read_block(top_step, block_size);
+                top_block = read_block(top_step, number_of_values);
                 left_block = read_block((step - 1), block_size);
                 diagonal_block = read_block(top_step - 1, block_size);
-                limit_block = calculate_limit_block(block_size, left_block, top_block, diagonal_block, string_length, X, Y,
-                                                      calculate_Y_coordinate(step,block_size,string_length), calculate_X_coordinate(step, block_size, string_length));
+                x_index = calculate_X_coordinate(step, block_size, string_length);
+                y_index = calculate_Y_coordinate(step,block_size,string_length);
+                limit_block = calculate_limit_block(block_size, left_block, top_block, diagonal_block,
+                        string_length, X, Y, y_index, x_index);
                 write_block(limit_block, number_of_values, step);
                 step++;
             }
@@ -91,8 +95,10 @@ int main() {
                 top_block = read_block(top_step, block_size);
                 left_block = read_block((step - 1), block_size);
                 diagonal_block = read_block(top_step - 1, block_size);
-                current_block = calculate_block(block_size, left_block, top_block, diagonal_block, string_length, X, Y,
-                                                calculate_Y_coordinate(step,block_size,string_length), calculate_X_coordinate(step, block_size, string_length));
+                x_index = calculate_X_coordinate(step, block_size, string_length);
+                y_index = calculate_Y_coordinate(step, block_size, string_length);
+                current_block = calculate_block(block_size, left_block, top_block, diagonal_block, string_length,
+                        X, Y, y_index, x_index);
                 write_block(current_block, block_size, step);
                 step++;
             }
@@ -100,7 +106,7 @@ int main() {
     }
 
     int* last_block = new int[block_size];
-    last_block = read_block(total_steps, block_size);
+    last_block = read_block(total_steps, number_of_values);
 
     cout << last_block[number_of_values - 1];
 

@@ -87,7 +87,7 @@ int calculate_X_coordinate(int step, int block_size, int string_length) {
  */
 int calculate_Y_coordinate(int step, int block_size, int string_length) {
     int blocks_per_line = ceil((double) string_length/block_size);
-    return step / blocks_per_line;
+    return (step - 1) / blocks_per_line;
 }
 
 /**
