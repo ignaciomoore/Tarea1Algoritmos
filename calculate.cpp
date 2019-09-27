@@ -29,8 +29,8 @@
  *      The calculated block
  */
 
-int* calculate_block(int block_size, int* left_block, int* top_block, int* diagonal_block, int string_size, char* X,
-        char* Y, int Y_char_index, int X_char_index) {
+int* calculate_block(int block_size, int* left_block, int* top_block, int* diagonal_block, int string_size, std::string X,
+        std::string Y, int Y_char_index, int X_char_index) {
 
     int* result_block = new int[block_size];
 
@@ -84,12 +84,12 @@ int* calculate_block(int block_size, int* left_block, int* top_block, int* diago
  * @return
  *      The int array of the values inside the block
  */
-int* calculate_limit_block(int block_size, int* left_block, int* top_block, int* diagonal_block, int string_size, char* X,
-                           char* Y, int Y_char_index, int X_char_index) {
+int* calculate_limit_block(int block_size, int* left_block, int* top_block, int* diagonal_block, int string_size, std::string X,
+                           std::string Y, int Y_char_index, int X_char_index) {
 
     int blocks_per_line = ceil((double) string_size / block_size);
     int number_of_values = string_size % (blocks_per_line - 1);
-    int* result_block = new int[block_size];
+    int* result_block = new int[number_of_values];
 
     int top_value;
     int left_value;

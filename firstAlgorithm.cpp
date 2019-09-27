@@ -67,7 +67,11 @@ int* read_block(int step, int block_size) {
  */
 int calculate_X_coordinate(int step, int block_size, int string_length) {
     int blocks_per_line = ceil((double) string_length/block_size);
-    return (step % blocks_per_line - 1) * block_size;
+    return ((step - 1) % blocks_per_line) * block_size;
+
+
+    //(step % blocks_per_line - 1) * block_size;    ORIGINAL
+    //((step - 1) % blocks_per_line) * block_size;
 }
 
 /**
