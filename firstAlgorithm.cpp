@@ -86,6 +86,14 @@ int calculate_Y_coordinate(int step, int block_size, int string_length) {
     return step / blocks_per_line;
 }
 
+/**
+ * Returns the two strings in the text file, one string is on top of the other.
+ *
+ * @param filename
+ *      Name of the filae that contains the strings
+ * @return
+ *      Pair of strings
+ */
 pair<string, string> get_strings(string filename) {
     string X;
     string Y;
@@ -95,4 +103,18 @@ pair<string, string> get_strings(string filename) {
     getline(infile, Y);
     infile.close();
     return make_pair(X,Y);
+}
+
+/**
+ * Calculates the step in which the top block was calculated
+ *
+ * @param step
+ *      The step of the current block
+ * @param blocks_per_line
+ *      The amount of blocks per line of the matrix
+ * @return
+ *      The step in which the top block was calculated
+ */
+int get_top_step(int step, int blocks_per_line) {
+    return step - blocks_per_line;
 }
