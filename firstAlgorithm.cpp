@@ -94,30 +94,28 @@ int calculate_Y_coordinate(int step, int block_size, int string_length) {
  * Returns the two strings in the text file, one string is on top of the other.
  *
  * @param filename
- *      Name of the filae that contains the strings
+ *      Name of the file that contains the strings
  * @return
  *      Pair of strings
  */
-pair<string, string> get_strings(string filename, int step, int string_length, int block_size) {
+pair<string, char > get_strings(string filename, int step, int string_length, int block_size) {
 
     string X_string;
     string Y_string;
+    char Y_char;
     int x = calculate_X_coordinate(step,block_size, string_length);
-    int y = calculate_X_coordinate(step,block_size, string_length);
-    string cell;
+    int y = calculate_Y_coordinate(step,block_size, string_length);
 
     ifstream infile;
     infile.open(filename);
 
-    infile.seekg(x,ios::beg);
-    infile >> cell;
-    X_string = cell.substr(0, block_size - 1);
-    infile.seekg(string_length, ios::beg);
-    infile >> cell;
-    Y_string = cell.substr(0, block_size - 1);
+    getline(infile, X_string);
+    X_string = X_string.substr(x, block_size);
+    getline(infile, Y_string);
+    Y_char = Y_string[y];
     infile.close();
 
-    return make_pair(X_string, Y_string);
+    return make_pair(X_string, Y_char);
 }
 
 /**

@@ -30,13 +30,13 @@
  */
 
 int* calculate_block(int block_size, int* left_block, int* top_block, int* diagonal_block, int string_size, std::string X,
-        std::string Y, int Y_char_index, int X_char_index) {
+        char Y) {
 
     int* result_block = new int[block_size];
 
     for (int w = 0; w < block_size; w++) {
         if (w == 0) {
-            if (X[X_char_index] == Y[Y_char_index]) {
+            if (X[w] == Y) {
                 result_block[0] = diagonal_block[block_size - 1];
             } else {
                 int top_value = top_block[0];
@@ -47,7 +47,7 @@ int* calculate_block(int block_size, int* left_block, int* top_block, int* diago
                 result_block[0] = second_minimum_value;
             }
         } else {
-            if (X[X_char_index] == Y[Y_char_index]) {
+            if (X[w] == Y) {
                 result_block[w] = top_block[w - 1];
             } else {
                 int top_value = top_block[w];
@@ -57,11 +57,6 @@ int* calculate_block(int block_size, int* left_block, int* top_block, int* diago
                 int second_minimum_value = std::min(first_minimum_value, diagonal_value + 1);
                 result_block[w] = second_minimum_value;
             }
-        }
-        X_char_index++;
-        if (X_char_index >= string_size) {
-            X_char_index = 0;
-            Y_char_index++;
         }
     }
     return result_block;
@@ -85,7 +80,7 @@ int* calculate_block(int block_size, int* left_block, int* top_block, int* diago
  *      The int array of the values inside the block
  */
 int* calculate_limit_block(int block_size, int* left_block, int* top_block, int* diagonal_block, int string_size, std::string X,
-                           std::string Y, int Y_char_index, int X_char_index) {
+                           char Y) {
 
     int blocks_per_line = ceil((double) string_size / block_size);
     int number_of_values = string_size % (blocks_per_line - 1);
@@ -99,7 +94,7 @@ int* calculate_limit_block(int block_size, int* left_block, int* top_block, int*
 
     for (int w = 0; w < number_of_values; w++) {
         if (w == 0) {
-            if (X[X_char_index] == Y[Y_char_index]) {
+            if (X[w] == Y) {
                 result_block[0] = diagonal_block[block_size - 1];
             } else {
                 top_value = top_block[0];
@@ -110,7 +105,7 @@ int* calculate_limit_block(int block_size, int* left_block, int* top_block, int*
                 result_block[0] = second_minimum_value;
             }
         } else {
-            if (X[X_char_index] == Y[Y_char_index]) {
+            if (X[w] == Y) {
                 result_block[w] = top_block[w - 1];
             } else {
                 top_value = top_block[w];
@@ -120,11 +115,6 @@ int* calculate_limit_block(int block_size, int* left_block, int* top_block, int*
                 second_minimum_value = std::min(first_minimum_value, diagonal_value + 1);
                 result_block[w] = second_minimum_value;
             }
-        }
-        X_char_index++;
-        if (X_char_index >= string_size) {
-            X_char_index = 0;
-            Y_char_index++;
         }
     }
 

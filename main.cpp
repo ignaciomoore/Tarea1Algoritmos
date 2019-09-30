@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <cstring>
 #include <cmath>
+#include <fstream>
 #include "calculate.hpp"
 #include "firstAlgorithm.hpp"
 
@@ -13,21 +14,17 @@ using namespace std;
 int main() {
 
     int step = 1;
-    int block_size = 3;    //  JUST FOR TESTING
+    int block_size = pow(2, 10);    //  JUST FOR TESTING
     int* top_block = new int[block_size];
     int* left_block = new int[block_size];
     int* diagonal_block = new int[block_size];
     int* current_block = new int[block_size];
-    string X;   //  MAKE STRING BLOCK
-    string Y;   //  MAKE STRING BLOCK
 
-    string filename = "two_strings.txt";    //  JUST FOR TESTING
-
-    pair<string, string> XeY = get_strings(filename);
-    X = XeY.first;
-    Y = XeY.second;
+    string filename = "random_string.txt";    //  JUST FOR TESTING
 
     int string_length = get_string_size(filename);
+
+    pair<string, char> XeY;
 
     int blocks_per_line = ceil((double) string_length/block_size);
     int total_steps = string_length * blocks_per_line;
@@ -38,6 +35,9 @@ int main() {
     int y_index;
     int minimum;
     int top_step;
+
+    string X_string;
+    char Y_char;
 
     for (int i = 0; i < string_length; i++) {
         for (int j = 0; j < blocks_per_line; j++) {
@@ -65,9 +65,8 @@ int main() {
                     if (k == 0)
                         current_block[k] = calculate_Y_coordinate(step, block_size, string_length);
                     else {
-                        x_index = calculate_X_coordinate(step, block_size, string_length) + k;
-                        y_index = calculate_Y_coordinate(step, block_size, string_length);
-                        if (X[x_index] == Y[y_index])
+                        XeY = get_strings(filename, step, string_length, block_size);  //  NEW
+                        if (XeY.first[k] == XeY.second)
                             current_block[k] = top_block[k - 1];
                         else {
                             minimum = min(top_block[k] + 1, current_block[k - 1] + 1);
@@ -84,10 +83,9 @@ int main() {
                 top_block = read_block(top_step, number_of_values);
                 left_block = read_block((step - 1), block_size);
                 diagonal_block = read_block(top_step - 1, block_size);
-                x_index = calculate_X_coordinate(step, block_size, string_length);
-                y_index = calculate_Y_coordinate(step,block_size,string_length);
+                XeY = get_strings(filename, step, string_length, number_of_values); //  NEW
                 limit_block = calculate_limit_block(block_size, left_block, top_block, diagonal_block,
-                                                    string_length, X, Y, y_index, x_index);
+                                                    string_length, XeY.first, XeY.second);
                 write_block(limit_block, number_of_values, step);
                 step++;
             }
@@ -96,10 +94,9 @@ int main() {
                 top_block = read_block(top_step, block_size);
                 left_block = read_block((step - 1), block_size);
                 diagonal_block = read_block(top_step - 1, block_size);
-                x_index = calculate_X_coordinate(step, block_size, string_length);
-                y_index = calculate_Y_coordinate(step, block_size, string_length);
+                XeY = get_strings(filename, step, string_length, block_size);   //  NEW
                 current_block = calculate_block(block_size, left_block, top_block, diagonal_block, string_length,
-                                                X, Y, y_index, x_index);
+                                                XeY.first, XeY.second);
                 write_block(current_block, block_size, step);
                 step++;
             }
