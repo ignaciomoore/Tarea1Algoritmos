@@ -119,5 +119,26 @@ int* calculate_limit_block(int block_size, int* left_block, int* top_block, int*
     }
 
     return result_block;
+
+    void generate_string(int size) {
+
+        ofstream random_string_file;
+        random_string_file.open ("random_string_2^" + size + ".txt");
+        int string_length = pow(2, size);
+        string string_x;
+        string string_y;
+        for (int i = 0; i < string_length_2; i++) {
+            int ascii_val = rand() % 26 + 65;
+            string_x += char(ascii_val);
+        }
+        for (int i = 0; i < string_length_2; i++) {
+            int ascii_val = rand() % 26 + 65;
+            string_y += char(ascii_val);
+        }
+        random_string_file << string_x << endl;
+        random_string_file << string_y << endl;
+        random_string_file.close();
+
+    }
 }
 

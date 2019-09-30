@@ -14,13 +14,17 @@ using namespace std;
 int main() {
 
     int step = 1;
-    int block_size = pow(2, 10);    //  JUST FOR TESTING
+
+    //int block_size = pow(2, 10);    //  JUST FOR TESTING
+    int block_size = 3;    //  JUST FOR TESTING
+
     int* top_block = new int[block_size];
     int* left_block = new int[block_size];
     int* diagonal_block = new int[block_size];
     int* current_block = new int[block_size];
 
-    string filename = "random_string.txt";    //  JUST FOR TESTING
+    //string filename = "random_string.txt";    //  JUST FOR TESTING
+    string filename = "two_strings.txt";    //  JUST FOR TESTING
 
     int string_length = get_string_size(filename);
 
@@ -28,7 +32,12 @@ int main() {
 
     int blocks_per_line = ceil((double) string_length/block_size);
     int total_steps = string_length * blocks_per_line;
-    int number_of_values = string_length % (blocks_per_line - 1);   //  NUMBER OF VALUES ON LIMIT BLOCK
+    int number_of_values;   //  NUMBER OF VALUES ON LIMIT BLOCK
+    if (blocks_per_line <= 1)
+        number_of_values = string_length;
+    else
+        number_of_values = string_length % (blocks_per_line - 1);
+
     int* limit_block = new int[number_of_values];   //  TRY TO DELETE THIS MEMORY SPACE AND USE CURRENT_BLOCK
 
     int x_index;
@@ -100,6 +109,7 @@ int main() {
                 write_block(current_block, block_size, step);
                 step++;
             }
+            cout << step << endl;
         }
     }
 
@@ -107,6 +117,9 @@ int main() {
     last_block = read_block(total_steps, number_of_values);
 
     cout << last_block[number_of_values - 1];
+    //cout << current_block[number_of_values - 1];
+
+
 
     return 0;
 }
