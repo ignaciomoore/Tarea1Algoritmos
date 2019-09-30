@@ -119,7 +119,7 @@ int main() {
     cout << last_block[number_of_values - 1];
     //cout << current_block[number_of_values - 1];
 
-
+    generate_string(10);
 
     return 0;
 }

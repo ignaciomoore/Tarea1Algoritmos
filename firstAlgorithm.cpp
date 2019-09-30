@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <cmath>
+#include <iostream>
 
 using namespace std;
 /**
@@ -93,27 +94,38 @@ int calculate_Y_coordinate(int step, int block_size, int string_length) {
 /**
  * Returns the two strings in the text file, one string is on top of the other.
  *
- * @param filename
+ * @param x_filename
  *      Name of the file that contains the strings
  * @return
  *      Pair of strings
  */
-pair<string, char > get_strings(string filename, int step, int string_length, int block_size) {
+pair<string, char > get_strings(string x_filename, string y_filename, int step, int string_length, int block_size) {
 
     string X_string;
-    string Y_string;
+    char* Y_string;
+
     char Y_char;
     int x = calculate_X_coordinate(step,block_size, string_length);
     int y = calculate_Y_coordinate(step,block_size, string_length);
 
-    ifstream infile;
-    infile.open(filename);
+    ifstream x_file;
+    x_file.open(x_filename, ios::binary);
 
-    getline(infile, X_string);
-    X_string = X_string.substr(x, block_size);
-    getline(infile, Y_string);
-    Y_char = Y_string[y];
-    infile.close();
+    char* xxx = new char [block_size];
+    x_file.seekg (x, ios::beg);
+    x_file.read (xxx, block_size);
+    x_file.close();
+
+    X_string = string(xxx);
+
+    ifstream y_file;
+    y_file.open(y_filename, ios::binary);
+
+    y_file.seekg (y, ios::beg);
+    y_file.read (Y_string, 1);
+    y_file.close();
+
+    Y_char = *Y_string;
 
     return make_pair(X_string, Y_char);
 }
@@ -148,4 +160,20 @@ int get_string_size(string filename) {
     getline(infile, line);
     infile.close();
     return line.length();
+}
+
+void generate_string(int size, string filename) {
+
+    ofstream string_file;
+    string_file.open(filename);
+
+    string x;
+
+    for (int i = 0; i < pow(2,size); i++) {
+        int c = rand() % 26 + 65;
+        x += char(c);
+    }
+
+    string_file << x;
+    string_file.close();
 }
