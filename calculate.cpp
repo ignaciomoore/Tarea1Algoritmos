@@ -9,7 +9,6 @@
 #include <algorithm>
 #include <cmath>
 #include <fstream>
-#include <mshtml.h>
 
 /**
  * Calculates the pending block on the bottom right corner

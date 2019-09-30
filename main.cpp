@@ -16,7 +16,7 @@ int main() {
     int step = 1;
 
     //int block_size = pow(2, 10);    //  JUST FOR TESTING
-    int block_size = 3;    //  JUST FOR TESTING
+    int block_size = pow(2,10);    //  JUST FOR TESTING
 
     int* top_block = new int[block_size];
     int* left_block = new int[block_size];
@@ -24,11 +24,12 @@ int main() {
     int* current_block = new int[block_size];
 
     //string filename = "random_string.txt";    //  JUST FOR TESTING
-    string filename = "two_strings.txt";    //  JUST FOR TESTING
+    string x_filename = "randomx.txt";    //  JUST FOR TESTING
+    string y_filename = "randomy.txt";
 
-    int string_length = get_string_size(filename);
+    int string_length = get_string_size(x_filename);
 
-    pair<string, char> XeY;
+    pair<string, char*> XeY;
 
     int blocks_per_line = ceil((double) string_length/block_size);
     int total_steps = string_length * blocks_per_line;
@@ -74,8 +75,8 @@ int main() {
                     if (k == 0)
                         current_block[k] = calculate_Y_coordinate(step, block_size, string_length);
                     else {
-                        XeY = get_strings(filename, step, string_length, block_size);  //  NEW
-                        if (XeY.first[k] == XeY.second)
+                        XeY = get_strings(x_filename, y_filename, step, string_length, block_size);  //  NEW
+                        if (XeY.first[k] == *XeY.second)
                             current_block[k] = top_block[k - 1];
                         else {
                             minimum = min(top_block[k] + 1, current_block[k - 1] + 1);
@@ -92,9 +93,9 @@ int main() {
                 top_block = read_block(top_step, number_of_values);
                 left_block = read_block((step - 1), block_size);
                 diagonal_block = read_block(top_step - 1, block_size);
-                XeY = get_strings(filename, step, string_length, number_of_values); //  NEW
+                XeY = get_strings(x_filename, y_filename, step, string_length, number_of_values); //  NEW
                 limit_block = calculate_limit_block(block_size, left_block, top_block, diagonal_block,
-                                                    string_length, XeY.first, XeY.second);
+                                                    string_length, XeY.first, *XeY.second);
                 write_block(limit_block, number_of_values, step);
                 step++;
             }
@@ -103,9 +104,9 @@ int main() {
                 top_block = read_block(top_step, block_size);
                 left_block = read_block((step - 1), block_size);
                 diagonal_block = read_block(top_step - 1, block_size);
-                XeY = get_strings(filename, step, string_length, block_size);   //  NEW
+                XeY = get_strings(x_filename, y_filename, step, string_length, block_size);   //  NEW
                 current_block = calculate_block(block_size, left_block, top_block, diagonal_block, string_length,
-                                                XeY.first, XeY.second);
+                                                XeY.first, *XeY.second);
                 write_block(current_block, block_size, step);
                 step++;
             }
@@ -118,8 +119,6 @@ int main() {
 
     cout << last_block[number_of_values - 1];
     //cout << current_block[number_of_values - 1];
-
-    generate_string(10);
 
     return 0;
 }

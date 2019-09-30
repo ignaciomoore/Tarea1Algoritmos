@@ -6,37 +6,7 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/iggym/CLionProjects/Tarea1Algoritmos/calculate.cpp
-iostream
--
-cstdio
--
-stdio.h
--
-windef.h
--
-algorithm
--
-cmath
--
-fstream
--
-mshtml.h
--
-
 C:/Users/iggym/CLionProjects/Tarea1Algoritmos/calculate.hpp
-
-C:/Users/iggym/CLionProjects/Tarea1Algoritmos/firstAlgorithm.cpp
-cstdio
--
-fstream
--
-string
--
-cmath
--
-iostream
--
 
 C:/Users/iggym/CLionProjects/Tarea1Algoritmos/firstAlgorithm.hpp
 

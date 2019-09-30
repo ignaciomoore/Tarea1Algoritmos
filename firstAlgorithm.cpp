@@ -99,7 +99,7 @@ int calculate_Y_coordinate(int step, int block_size, int string_length) {
  * @return
  *      Pair of strings
  */
-pair<string, char > get_strings(string x_filename, string y_filename, int step, int string_length, int block_size) {
+pair<string, char* > get_strings(string x_filename, string y_filename, int step, int string_length, int block_size) {
 
     string X_string;
     char* Y_string;
@@ -125,9 +125,7 @@ pair<string, char > get_strings(string x_filename, string y_filename, int step, 
     y_file.read (Y_string, 1);
     y_file.close();
 
-    Y_char = *Y_string;
-
-    return make_pair(X_string, Y_char);
+    return make_pair(X_string, Y_string);
 }
 
 /**
