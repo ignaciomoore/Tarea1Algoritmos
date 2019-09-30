@@ -18,8 +18,8 @@ int main() {
     int* left_block = new int[block_size];
     int* diagonal_block = new int[block_size];
     int* current_block = new int[block_size];
-    string X;
-    string Y;
+    string X;   //  MAKE STRING BLOCK
+    string Y;   //  MAKE STRING BLOCK
 
     string filename = "two_strings.txt";    //  JUST FOR TESTING
 
@@ -27,11 +27,12 @@ int main() {
     X = XeY.first;
     Y = XeY.second;
 
-    int string_length = X.length();
+    int string_length = get_string_size(filename);
+
     int blocks_per_line = ceil((double) string_length/block_size);
     int total_steps = string_length * blocks_per_line;
     int number_of_values = string_length % (blocks_per_line - 1);   //  NUMBER OF VALUES ON LIMIT BLOCK
-    int* limit_block = new int[number_of_values];
+    int* limit_block = new int[number_of_values];   //  TRY TO DELETE THIS MEMORY SPACE AND USE CURRENT_BLOCK
 
     int x_index;
     int y_index;

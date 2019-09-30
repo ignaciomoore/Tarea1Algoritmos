@@ -98,11 +98,14 @@ int calculate_Y_coordinate(int step, int block_size, int string_length) {
  * @return
  *      Pair of strings
  */
-pair<string, string> get_strings(string filename) {
+pair<string, string> get_strings(string filename, int step, int string_length, int block_size) {
     string X;
     string Y;
+    int x = calculate_X_coordinate(step,block_size, string_length);
+    int y = calculate_X_coordinate(step,block_size, string_length);
     ifstream infile;
     infile.open(filename);
+    infile.seekg(x,ios::beg);
     getline(infile, X);
     getline(infile, Y);
     infile.close();
@@ -121,4 +124,22 @@ pair<string, string> get_strings(string filename) {
  */
 int get_top_step(int step, int blocks_per_line) {
     return step - blocks_per_line;
+}
+
+/**
+ * Returns the length of the line in the file
+ *
+ * @param filename
+ *      Name of the file
+ * @return
+ *      Line length
+ */
+int get_string_size(string filename) {
+
+    string line;
+    ifstream infile;
+    infile.open(filename);
+    getline(infile, line);
+    infile.close();
+    return line.length();
 }
