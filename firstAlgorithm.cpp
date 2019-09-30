@@ -99,17 +99,25 @@ int calculate_Y_coordinate(int step, int block_size, int string_length) {
  *      Pair of strings
  */
 pair<string, string> get_strings(string filename, int step, int string_length, int block_size) {
-    string X;
-    string Y;
+
+    string X_string;
+    string Y_string;
     int x = calculate_X_coordinate(step,block_size, string_length);
     int y = calculate_X_coordinate(step,block_size, string_length);
+    string cell;
+
     ifstream infile;
     infile.open(filename);
+
     infile.seekg(x,ios::beg);
-    getline(infile, X);
-    getline(infile, Y);
+    infile >> cell;
+    X_string = cell.substr(0, block_size - 1);
+    infile.seekg(string_length, ios::beg);
+    infile >> cell;
+    Y_string = cell.substr(0, block_size - 1);
     infile.close();
-    return make_pair(X,Y);
+
+    return make_pair(X_string, Y_string);
 }
 
 /**

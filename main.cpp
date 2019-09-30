@@ -87,7 +87,7 @@ int main() {
                 x_index = calculate_X_coordinate(step, block_size, string_length);
                 y_index = calculate_Y_coordinate(step,block_size,string_length);
                 limit_block = calculate_limit_block(block_size, left_block, top_block, diagonal_block,
-                        string_length, X, Y, y_index, x_index);
+                                                    string_length, X, Y, y_index, x_index);
                 write_block(limit_block, number_of_values, step);
                 step++;
             }
@@ -99,7 +99,7 @@ int main() {
                 x_index = calculate_X_coordinate(step, block_size, string_length);
                 y_index = calculate_Y_coordinate(step, block_size, string_length);
                 current_block = calculate_block(block_size, left_block, top_block, diagonal_block, string_length,
-                        X, Y, y_index, x_index);
+                                                X, Y, y_index, x_index);
                 write_block(current_block, block_size, step);
                 step++;
             }

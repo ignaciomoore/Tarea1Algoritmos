@@ -6,21 +6,13 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/iggym/CLionProjects/Tarea1Algoritmos/calculate.hpp
-
-C:/Users/iggym/CLionProjects/Tarea1Algoritmos/firstAlgorithm.hpp
-
-C:/Users/iggym/CLionProjects/Tarea1Algoritmos/main.cpp
-iostream
+C:/Users/iggym/CLionProjects/Tarea1Algoritmos/firstAlgorithm.cpp
+cstdio
 -
-algorithm
+fstream
 -
-cstring
+string
 -
 cmath
 -
-calculate.hpp
-C:/Users/iggym/CLionProjects/Tarea1Algoritmos/calculate.hpp
-firstAlgorithm.hpp
-C:/Users/iggym/CLionProjects/Tarea1Algoritmos/firstAlgorithm.hpp
 
