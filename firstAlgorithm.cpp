@@ -9,6 +9,7 @@
 #include <iostream>
 #include <chrono>
 #include "calculate.hpp"
+#include <bitset>
 
 using namespace std;
 /**
@@ -23,6 +24,17 @@ using namespace std;
 void write_block(int* block, int block_size, int step) {
     string filename = "calculated_block_" + to_string(step) + ".txt";
     ofstream outfile (filename);
+    string binary_value;
+
+    for (int i = 0; i < block_size; i++) {
+        binary_value = bitset<32> (block[i]).to_string();
+        outfile << binary_value;
+    }
+
+    outfile.close();
+    /**
+    string filename = "calculated_block_" + to_string(step) + ".txt";
+    ofstream outfile (filename);
     string out_block = "";
 
     for (int i = 0; i < block_size; i++)
@@ -30,6 +42,7 @@ void write_block(int* block, int block_size, int step) {
 
     outfile << out_block;
     outfile.close();
+     */
 }
 
 /**
@@ -42,6 +55,23 @@ void write_block(int* block, int block_size, int step) {
  *      The block as an int array
  */
 int* read_block(int step, int block_size) {
+
+    ifstream infile;
+    string filename = "calculated_block_" + to_string(step) + ".txt";
+    infile.open(filename);
+    string string_cell;
+    char* cell = new char[32];
+    int * block = new int[block_size];
+
+    for (int i = 0; i < block_size; i++) {
+        infile.read(cell, 32);
+        string_cell = string(cell);
+        int int_cell = stoi(string_cell, 0, 2);
+        block[i] = int_cell;
+    }
+    infile.close();
+    return block;
+    /**
     ifstream infile;
     string filename = "calculated_block_" + to_string(step) + ".txt";
     infile.open(filename);
@@ -55,6 +85,7 @@ int* read_block(int step, int block_size) {
 
     infile.close();
     return block;
+     */
 }
 
 /**
@@ -167,7 +198,7 @@ void generate_string(int size, string filename) {
     ofstream string_file;
     string_file.open(filename);
 
-    for (int i = 0; i < pow(2,size); i++) {
+    for (int i = 0; i < size; i++) {
         int c = rand() % 26 + 65;
         string_file << char(c);
     }
@@ -311,6 +342,7 @@ int algorithm(int block_size, string x_filename, string y_filename) {
 }
 
 void run_test(int block_size, string x_filename, string y_filename, string out_filename) {
+
     auto start = chrono::high_resolution_clock::now();
 
     int distance = algorithm(block_size,x_filename, y_filename);
@@ -323,6 +355,6 @@ void run_test(int block_size, string x_filename, string y_filename, string out_f
 
     ofstream outfile(out_filename);
     outfile << "Test for block size " << block_size << " and string size " << string_size << endl;
-    outfile << "Execution time: " << duration.count() << endl;
+    outfile << "Execution time: " << duration.count() << " seconds" <<endl;
     outfile << "Distance: " << distance << endl;
 }
