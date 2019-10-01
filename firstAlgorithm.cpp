@@ -297,11 +297,12 @@ void algorithm(int block_size, string x_filename, string y_filename) {
 
     if (number_of_values != 0) {
         limit_block = read_block(total_steps, number_of_values);
-        cout << limit_block[number_of_values - 1];
+        cout << "Distance: ";
+        cout << limit_block[number_of_values - 1] << endl;
     }
     else {
         current_block = read_block(total_steps, block_size);
         cout << "Distance: ";
-        cout << current_block[block_size - 1];
+        cout << current_block[block_size - 1] << endl;
     }
 }
