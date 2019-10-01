@@ -17,4 +17,6 @@ int get_string_size(string filename);
 
 void generate_string(int size, string filename);
 
-void algorithm(int block_size, string x_filename, string y_filename);
+int algorithm(int block_size, string x_filename, string y_filename);
+
+void run_test(int block_size, string x_filename, string y_filename, string out_filename);

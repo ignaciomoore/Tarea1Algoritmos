@@ -16,20 +16,46 @@ using namespace std;
 
 int main() {
 
-    auto start = chrono::high_resolution_clock::now();
+    string x_filename;
+    string y_filename;
 
-    string x_filename = "ananas.txt";
-    string y_filename = "banana.txt";
+    int block_size;
 
-    int block_size = 4;
+    //  TEST #1
 
-    algorithm(block_size,x_filename, y_filename);
+    x_filename = "x_2^10.txt";
+    y_filename = "y_2^10.txt";
 
-    auto end = chrono::high_resolution_clock::now();
+    block_size = pow(2, 10);
 
-    chrono::duration<float > duration = end - start;
+    run_test(block_size, x_filename, y_filename, "A1_B2^10_S2^10_experiment.txt");
 
-    cout << "Execution time: " << duration.count() << " s" << endl;
+    //  TEST #2
+
+    x_filename = "x_2^11.txt";
+    y_filename = "y_2^11.txt";
+
+    block_size = pow(2, 10);
+
+    run_test(block_size, x_filename, y_filename, "A1_B2^10_S2^11_experiment.txt");
+
+    //  TEST #3
+
+    x_filename = "x_2^12.txt";
+    y_filename = "y_2^12.txt";
+
+    block_size = pow(2, 10);
+
+    run_test(block_size, x_filename, y_filename, "A1_B2^10_S2^12_experiment.txt");
+
+    //  TEST #4
+
+    x_filename = "x_2^13.txt";
+    y_filename = "y_2^13.txt";
+
+    block_size = pow(2, 10);
+
+    run_test(block_size, x_filename, y_filename, "A1_B2^10_S2^13_experiment.txt");
 
     return 0;
 }

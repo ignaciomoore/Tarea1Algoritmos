@@ -7,6 +7,7 @@
 #include <string>
 #include <cmath>
 #include <iostream>
+#include <chrono>
 #include "calculate.hpp"
 
 using namespace std;
@@ -174,7 +175,7 @@ void generate_string(int size, string filename) {
     string_file.close();
 }
 
-void algorithm(int block_size, string x_filename, string y_filename) {
+int algorithm(int block_size, string x_filename, string y_filename) {
 
     int step = 1;
 
@@ -299,10 +300,29 @@ void algorithm(int block_size, string x_filename, string y_filename) {
         limit_block = read_block(total_steps, number_of_values);
         cout << "Distance: ";
         cout << limit_block[number_of_values - 1] << endl;
+        return limit_block[number_of_values - 1];
     }
     else {
         current_block = read_block(total_steps, block_size);
         cout << "Distance: ";
         cout << current_block[block_size - 1] << endl;
+        return current_block[block_size - 1];
     }
+}
+
+void run_test(int block_size, string x_filename, string y_filename, string out_filename) {
+    auto start = chrono::high_resolution_clock::now();
+
+    int distance = algorithm(block_size,x_filename, y_filename);
+
+    auto end = chrono::high_resolution_clock::now();
+
+    chrono::duration<float > duration = end - start;
+
+    int string_size = get_string_size(x_filename);
+
+    ofstream outfile(out_filename);
+    outfile << "Test for block size " << block_size << " and string size " << string_size << endl;
+    outfile << "Execution time: " << duration.count() << endl;
+    outfile << "Distance: " << distance << endl;
 }
