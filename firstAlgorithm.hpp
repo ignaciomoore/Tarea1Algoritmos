@@ -16,3 +16,5 @@ int get_top_step(int step, int blocks_per_line);
 int get_string_size(string filename);
 
 void generate_string(int size, string filename);
+
+void algorithm(int block_size, string x_filename, string y_filename);

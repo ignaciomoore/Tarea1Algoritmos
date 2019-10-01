@@ -30,7 +30,7 @@
  *      The calculated block
  */
 
-int* calculate_block(int block_size, int* left_block, int* top_block, int* diagonal_block, int string_size, std::string X,
+int* calculate_block(int block_size, int left_block_value, int* top_block, int diagonal_block_value, int string_size, std::string X,
         char Y) {
 
     int* result_block = new int[block_size];
@@ -38,12 +38,12 @@ int* calculate_block(int block_size, int* left_block, int* top_block, int* diago
     for (int w = 0; w < block_size; w++) {
         if (w == 0) {
             if (X[w] == Y) {
-                result_block[0] = diagonal_block[block_size - 1];
+                result_block[0] = diagonal_block_value;
             } else {
                 int top_value = top_block[0];
-                int left_value = left_block[block_size - 1];
+                int left_value = left_block_value;
                 int first_minimum_value = std::min(top_value + 1, left_value + 1);
-                int diagonal_value = diagonal_block[block_size - 1];
+                int diagonal_value = diagonal_block_value;
                 int second_minimum_value = std::min(first_minimum_value, diagonal_value + 1);
                 result_block[0] = second_minimum_value;
             }
@@ -80,7 +80,7 @@ int* calculate_block(int block_size, int* left_block, int* top_block, int* diago
  * @return
  *      The int array of the values inside the block
  */
-int* calculate_limit_block(int block_size, int* left_block, int* top_block, int* diagonal_block, int string_size, std::string X,
+int* calculate_limit_block(int block_size, int left_block_value, int* top_block, int diagonal_block_value, int string_size, std::string X,
                            char Y) {
 
     int blocks_per_line = ceil((double) string_size / block_size);
@@ -96,12 +96,12 @@ int* calculate_limit_block(int block_size, int* left_block, int* top_block, int*
     for (int w = 0; w < number_of_values; w++) {
         if (w == 0) {
             if (X[w] == Y) {
-                result_block[0] = diagonal_block[block_size - 1];
+                result_block[0] = diagonal_block_value;
             } else {
                 top_value = top_block[0];
-                left_value = left_block[block_size - 1];
+                left_value = left_block_value;
                 first_minimum_value = std::min(top_value + 1, left_value + 1);
-                diagonal_value = diagonal_block[block_size - 1];
+                diagonal_value = diagonal_block_value;
                 second_minimum_value = std::min(first_minimum_value, diagonal_value + 1);
                 result_block[0] = second_minimum_value;
             }
