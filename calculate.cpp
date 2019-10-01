@@ -84,7 +84,7 @@ int* calculate_limit_block(int block_size, int left_block_value, int* top_block,
                            char Y) {
 
     int blocks_per_line = ceil((double) string_size / block_size);
-    int number_of_values = string_size % (blocks_per_line - 1);
+    int number_of_values = string_size % block_size;
     int* result_block = new int[number_of_values];
 
     int top_value;

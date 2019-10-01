@@ -227,14 +227,14 @@ void algorithm(int block_size, string x_filename, string y_filename) {
                 else if (j == (blocks_per_line - 1) && (number_of_values != 0)) {
                     x_index = calculate_X_coordinate(step, block_size, string_length);
                     for (int k = 0; k < number_of_values; k++)
-                        top_block[k] = x_index + k;
+                        top_block[k] = x_index + 1 + k;
                     left_block = read_block(step - 1, block_size);
-                    XeY = get_strings(x_filename, y_filename, step, string_length, block_size);
+                    XeY = get_strings(x_filename, y_filename, step, string_length, number_of_values);
                     X_string = XeY.first;
-                    X_string = X_string.substr(0, block_size);
+                    X_string = X_string.substr(0, number_of_values);
                     Y_char = *(XeY.second);
                     limit_block = calculate_limit_block(block_size, left_block[block_size - 1], top_block,
-                            x_index, string_length, X_string, Y_char);
+                            x_index + 1, string_length, X_string, Y_char);
                     write_block(limit_block, number_of_values, step);
                     step++;
                 }
@@ -266,17 +266,17 @@ void algorithm(int block_size, string x_filename, string y_filename) {
                 write_block(current_block, block_size, step);
                 step++;
             }
-            else if (j == (block_size - 1) && (number_of_values != 0)) {
+            else if (j == (blocks_per_line - 1) && (number_of_values != 0)) {
                 top_step = get_top_step(step,blocks_per_line);
                 top_block = read_block(top_step, number_of_values);
                 left_block = read_block((step - 1), block_size);
                 diagonal_block = read_block(top_step - 1, block_size);
-                XeY = get_strings(x_filename, y_filename, step, string_length, block_size);
+                XeY = get_strings(x_filename, y_filename, step, string_length, number_of_values);
                 X_string = XeY.first;
-                X_string = X_string.substr(0, block_size);
+                X_string = X_string.substr(0, number_of_values);
                 Y_char = *(XeY.second);
-                limit_block = calculate_limit_block(block_size, left_block[number_of_values - 1],
-                        top_block,diagonal_block[number_of_values - 1], string_length, X_string, Y_char);
+                limit_block = calculate_limit_block(block_size, left_block[block_size - 1],
+                        top_block,diagonal_block[block_size - 1], string_length, X_string, Y_char);
                 write_block(limit_block, number_of_values, step);
                 step++;
             }
