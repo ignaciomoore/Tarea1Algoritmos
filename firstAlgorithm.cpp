@@ -166,14 +166,11 @@ void generate_string(int size, string filename) {
     ofstream string_file;
     string_file.open(filename);
 
-    string x;
-
     for (int i = 0; i < pow(2,size); i++) {
         int c = rand() % 26 + 65;
-        x += char(c);
+        string_file << char(c);
     }
 
-    string_file << x;
     string_file.close();
 }
 

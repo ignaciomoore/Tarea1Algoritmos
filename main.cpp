@@ -15,13 +15,15 @@ using namespace std;
 
 int main() {
 
-    string x_filename = "ananas.txt";
-    string y_filename = "banana.txt";
+    string x_filename = "x_2^13.txt";
+    string y_filename = "y_2^13.txt";
+    //string x_filename = "x100test.txt";
+    //string y_filename = "y100test.txt";
 
-    int block_size = 4;
+    int x_string_length = get_string_size(x_filename);
+    int y_string_length = get_string_size(y_filename);
 
-    algorithm(block_size, x_filename, y_filename);
-
-
+    cout << y_string_length << endl;
+    cout << x_string_length << endl;
     return 0;
 }
