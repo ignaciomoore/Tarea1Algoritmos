@@ -187,12 +187,16 @@ void algorithm(int block_size, string x_filename, string y_filename) {
     int* current_block = new int[block_size];
 
     int string_length = get_string_size(x_filename);
+    cout << "string length: " << string_length << endl;
 
     pair<string, char*> XeY;
 
     int blocks_per_line = ceil((double) string_length/block_size);
+    cout << "blocks per line: " << blocks_per_line << endl;
     int total_steps = string_length * blocks_per_line;
-    int number_of_values = string_length % blocks_per_line;;   //  NUMBER OF VALUES ON LIMIT BLOCK
+    cout << "total steps: " << total_steps << endl;
+    int number_of_values = string_length % block_size;   //  NUMBER OF VALUES ON LIMIT BLOCK
+    cout << "number of values on limit blocks: " << number_of_values << endl;
 
     int* limit_block = new int[number_of_values];   //  TRY TO DELETE THIS MEMORY SPACE AND USE CURRENT_BLOCK
 
@@ -209,33 +213,43 @@ void algorithm(int block_size, string x_filename, string y_filename) {
             if (i == 0) {
                 if (j == 0) {
                     for (int k = 0; k < block_size; k++) {
-                        top_block[k] = k;
+                        top_block[k] = k + 1;
                     }
                     XeY = get_strings(x_filename, y_filename, step, string_length, block_size);
+                    X_string = XeY.first;
+                    X_string = X_string.substr(0, block_size);
+                    Y_char = *(XeY.second);
                     current_block = calculate_block(block_size, 1, top_block,
-                                                    0, string_length, XeY.first, *XeY.second);
+                                                    0, string_length, X_string, Y_char);
                     write_block(current_block, block_size, step);
                     step++;
                 }
-                else if (j == (blocks_per_line - 1)) {
+                else if (j == (blocks_per_line - 1) && (number_of_values != 0)) {
                     x_index = calculate_X_coordinate(step, block_size, string_length);
                     for (int k = 0; k < number_of_values; k++)
                         top_block[k] = x_index + k;
                     left_block = read_block(step - 1, block_size);
                     XeY = get_strings(x_filename, y_filename, step, string_length, block_size);
-                    limit_block = calculate_limit_block(block_size, left_block[block_size - 1], top_block, x_index - 1, string_length, XeY.first, *XeY.second);
+                    X_string = XeY.first;
+                    X_string = X_string.substr(0, block_size);
+                    Y_char = *(XeY.second);
+                    limit_block = calculate_limit_block(block_size, left_block[block_size - 1], top_block,
+                            x_index, string_length, X_string, Y_char);
                     write_block(limit_block, number_of_values, step);
                     step++;
                 }
                 else {
                     x_index = calculate_X_coordinate(step, block_size, string_length);
                     for (int k = 0; k < block_size; k++) {
-                        top_block[k] = x_index + k;
+                        top_block[k] = x_index + 1 + k;
                     }
                     left_block = read_block(step - 1, block_size);
                     XeY = get_strings(x_filename, y_filename, step, string_length, block_size);
+                    X_string = XeY.first;
+                    X_string = X_string.substr(0, block_size);
+                    Y_char = *(XeY.second);
                     current_block = calculate_block(block_size, left_block[block_size - 1], top_block,
-                                                    x_index - 1, string_length, XeY.first, *XeY.second);
+                                                    x_index, string_length, X_string, Y_char);
                     write_block(current_block, block_size, step);
                     step++;
                 }
@@ -243,18 +257,26 @@ void algorithm(int block_size, string x_filename, string y_filename) {
             else if (j == 0) {
                 top_block = read_block(get_top_step(step, blocks_per_line), block_size);
                 y_index = calculate_Y_coordinate(step, block_size, string_length);
-                current_block = calculate_block(block_size, y_index, top_block, y_index - 1,
-                                                string_length, XeY.first, *XeY.second);
+                XeY = get_strings(x_filename, y_filename, step, string_length, block_size);
+                X_string = XeY.first;
+                X_string = X_string.substr(0, block_size);
+                Y_char = *(XeY.second);
+                current_block = calculate_block(block_size, y_index + 1, top_block, y_index,
+                                                string_length, X_string, Y_char);
                 write_block(current_block, block_size, step);
                 step++;
             }
-            else if (j == (block_size - 1)) {
+            else if (j == (block_size - 1) && (number_of_values != 0)) {
                 top_step = get_top_step(step,blocks_per_line);
                 top_block = read_block(top_step, number_of_values);
                 left_block = read_block((step - 1), block_size);
                 diagonal_block = read_block(top_step - 1, block_size);
-                XeY = get_strings(x_filename, y_filename, step, string_length, number_of_values); //  NEW
-                limit_block = calculate_limit_block(block_size, left_block[number_of_values - 1], top_block,diagonal_block[number_of_values - 1], string_length, XeY.first, *XeY.second);
+                XeY = get_strings(x_filename, y_filename, step, string_length, block_size);
+                X_string = XeY.first;
+                X_string = X_string.substr(0, block_size);
+                Y_char = *(XeY.second);
+                limit_block = calculate_limit_block(block_size, left_block[number_of_values - 1],
+                        top_block,diagonal_block[number_of_values - 1], string_length, X_string, Y_char);
                 write_block(limit_block, number_of_values, step);
                 step++;
             }
@@ -263,19 +285,26 @@ void algorithm(int block_size, string x_filename, string y_filename) {
                 top_block = read_block(top_step, block_size);
                 left_block = read_block((step - 1), block_size);
                 diagonal_block = read_block(top_step - 1, block_size);
-                XeY = get_strings(x_filename, y_filename, step, string_length, block_size);   //  NEW
+                XeY = get_strings(x_filename, y_filename, step, string_length, block_size);
+                X_string = XeY.first;
+                X_string = X_string.substr(0, block_size);
+                Y_char = *(XeY.second);
                 current_block = calculate_block(block_size, left_block[block_size - 1], top_block,
-                                                diagonal_block[block_size - 1], string_length, XeY.first, *XeY.second);
+                                                diagonal_block[block_size - 1], string_length, X_string, Y_char);
                 write_block(current_block, block_size, step);
                 step++;
             }
-            cout << step << endl;
+            cout << "Step: " << step << endl;
         }
     }
 
-    int* last_block = new int[block_size];
-    last_block = read_block(total_steps, number_of_values);
-
-    cout << last_block[number_of_values - 1];
-    //cout << current_block[number_of_values - 1];
+    if (number_of_values != 0) {
+        limit_block = read_block(total_steps, number_of_values);
+        cout << limit_block[number_of_values - 1];
+    }
+    else {
+        current_block = read_block(total_steps, block_size);
+        cout << "Distance: ";
+        cout << current_block[block_size - 1];
+    }
 }
