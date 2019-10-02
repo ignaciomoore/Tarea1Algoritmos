@@ -17,16 +17,8 @@ int get_string_size(string filename);
 
 void generate_string(int size, string filename);
 
-int algorithm(int block_size, string x_filename, string y_filename);
-
-void run_test(int block_size, string x_filename, string y_filename, string out_filename);
-
-int alternate_algorithm(int block_size, string x_filename, string y_filename);
-
-int* calculate(string x, char y, int left_value, int* top_block, int diagonal_value, int block_size);
+void algorithm(int block_size, string x_filename, string y_filename, string out_filename);
 
 int calculate_value(char x, char y, int left_value, int top_value, int diagonal_value);
-
-int findDistance(char a[], char b[]);
 
 int findMin(int x, int y, int z);
