@@ -16,25 +16,27 @@ int main() {
 
     //string x_filename = "x_2^10.txt";
     //string y_filename = "y_2^10.txt";
-    string x_filename = "ananas.txt";
-    string y_filename = "banana.txt";
+    string x_filename = "zx_2^7.txt";
+    string y_filename = "zy_2^7.txt";
 
-    //int block_size = pow(2, 7);
-    int block_size = 6;
+    int block_size = pow(2, 7);
+    //int block_size = 6;
 
     run_test(block_size, x_filename, y_filename, "ztest.txt");
 
-    //generate_string(pow(2, 6), "zx_2^6.txt");
-    //generate_string(pow(2, 6), "zy_2^6.txt");
+    //generate_string(pow(2, 7), "zx_2^7.txt");
+    //generate_string(pow(2, 7), "zy_2^7.txt");
+/**
+    int * a = new int [block_size];
+    for (int i = 0; i < get_string_size(y_filename); i++) {
+        a = read_block(i+1, block_size);
+        for (int j = 0; j < block_size; j++) {
+            cout << a[j] << " ";
+        }
+        cout << endl;
+    }
+*/
+    cout << "Block size: " << block_size << endl;
 
-    cout << block_size << endl;
-
-    int * a = new int[3];
-    a[0] = 1;
-    a[1] = 2;
-    a[2] = 3;
-
-    for (int i = 0; i < 3; i++)
-        cout << a[i];
     return 0;
 }
